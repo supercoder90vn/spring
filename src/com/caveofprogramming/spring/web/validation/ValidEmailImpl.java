@@ -23,7 +23,7 @@ public class ValidEmailImpl implements ConstraintValidator<ValidEmail, String> {
 		}
 		boolean regexCheck = email.matches("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
 			+ "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
-		return true;
+		return regexCheck;
 	}
 
 }

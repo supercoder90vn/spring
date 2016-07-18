@@ -3,40 +3,59 @@ package com.caveofprogramming.spring.web.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Service;
 
 import com.caveofprogramming.spring.web.dao.Offer;
-import com.caveofprogramming.spring.web.dao.OffersDAO;
+import com.caveofprogramming.spring.web.dao.OffersDao;
 
 @Service
 public class OffersService {
 	
-	private OffersDAO offersDao;
+	private OffersDao offersDao;
 	
 	public List<Offer> getCurrent(){
 		return offersDao.getOffers();
 	}
 	
 	@Autowired
-	public void setOffersDao(OffersDAO offersDao) {
+	public void setOffersDao(OffersDao offersDao) {
 		this.offersDao = offersDao;
 	}
 	
-	public OffersDAO getOffersDao() {
+	public OffersDao getOffersDao() {
 		return offersDao;
 	}
-
+	@Secured({"ROLE_USER","ROLE_ADMIN"})
 	public void create(Offer offer) {
 		offersDao.create(offer);
 		
 	}
 
-	public void throwTestException() {
-		offersDao.getOffer(99999);
-		
+	public boolean hasOffer(String username) {		
+		return getOffer(username)!=null;
 	}
 
-	
-	
-	
+	public Offer getOffer(String username) {
+		if(username==null) {
+			return null;
+		}
+		
+		List<Offer> offers = offersDao.getOffers(username);
+		
+		if(offers.size()==0){
+			return null;
+		}
+		
+		return offers.get(0);
+	}
+
+	public void saveOrUpdate(Offer offer) {	
+		offersDao.saveOrUpdate(offer);
+	}
+
+	public void delete(int id) {
+		offersDao.delete(id);
+		
+	}
 }

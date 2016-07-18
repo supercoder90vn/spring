@@ -22,18 +22,18 @@
 	<p />
 	<b>Use sql:query and c:forEach:</b></b><br/>
 	<sql:query var="rs" dataSource="jdbc/spring">
-	select id, name, email, text from offers
+		select id, name, email, text from offers
 	</sql:query>
 	<c:forEach var="row" items="${rs.rows}">
-    ID: ${row.id}<br />
-    Name: ${row.name}<br />
+	    ID: ${row.id}<br />
+	    Name: ${row.name}<br />
 	</c:forEach>
 	
 	<p />
 	<b>Use Controller+ Service+Dao</b> <br/>
 	<c:forEach var="row" items="${offers}">
-    ID: ${row.id}<br />
-    Name: ${row.name}<br />
+	    ID: ${row.id}<br />
+	    Name: ${row.name}<br />
 	</c:forEach>
 </body>
 </html>

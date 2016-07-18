@@ -11,13 +11,13 @@
   </welcome-file-list>
   <servlet>
     <description></description>
-    <display-name>offers</display-name>
-    <servlet-name>offers</servlet-name>
+    <display-name>spring</display-name>
+    <servlet-name>spring</servlet-name>
     <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
     <load-on-startup>1</load-on-startup>
   </servlet>
   <servlet-mapping>
-    <servlet-name>offers</servlet-name>
+    <servlet-name>spring</servlet-name>
     <url-pattern>/</url-pattern>
   </servlet-mapping>
   <description>Spring Database</description>
@@ -35,6 +35,23 @@
     <param-value>
 	  	classpath:com/caveofprogramming/spring/web/config/dao-context.xml
 	  	classpath:com/caveofprogramming/spring/web/config/service-context.xml
+	  	classpath:com/caveofprogramming/spring/web/config/security-context.xml
 	  	</param-value>
   </context-param>
+  <context-param>
+    <param-name>spring.profiles.active</param-name>
+    <param-value>production</param-value>
+  </context-param>
+  <filter>
+    <display-name>springSecurityFilterChain</display-name>
+    <filter-name>springSecurityFilterChain</filter-name>
+    <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>springSecurityFilterChain</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+  <session-config>
+    <session-timeout>20</session-timeout>
+  </session-config>
 </web-app>
